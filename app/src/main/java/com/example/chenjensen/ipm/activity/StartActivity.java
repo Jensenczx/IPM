@@ -9,17 +9,17 @@ import android.view.animation.AnimationUtils;
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.base.BaseActivity;
+import com.example.chenjensen.ipm.util.SharedPreferenceHelper;
 
 public class StartActivity extends BaseActivity {
 
     private View mView;
     private Animation mAnimation;
-    private final int TIME = 800;
-
-    public static final int VIEW_ID = R.layout.activity_start;
-    public static final int ANIM_ID = R.anim.alpha;
-    public static final Class ACTIVITY_MAIN_CLASS_NAME = MainActivity.class;
-    //public static final Class ACTIVITY_GUIDE_CLASS_NAME = GuideActivity.class;
+    private static final int VIEW_ID = R.layout.activity_start;
+    private static final int ANIM_ID = R.anim.alpha;
+    private static final Class ACTIVITY_MAIN_CLASS_NAME = MainActivity.class;
+    private static final Class ACTIVITY_GUIDE_CLASS_NAME = GuideActivity.class;
+    private static final String IS_FIST_OPEN_KEY = "isfistopen";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,12 @@ public class StartActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                skipActivity(ACTIVITY_MAIN_CLASS_NAME);
+                boolean isFirstOpen = SharedPreferenceHelper.getBooleanValue(IS_FIST_OPEN_KEY);
+                if (isFirstOpen) {
+                    skipActivity(ACTIVITY_MAIN_CLASS_NAME);
+                }else{
+                    skipActivity(ACTIVITY_GUIDE_CLASS_NAME);
+                }
             }
 
             @Override
