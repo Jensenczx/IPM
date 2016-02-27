@@ -19,7 +19,7 @@ public class StartActivity extends BaseActivity {
     private static final int ANIM_ID = R.anim.alpha;
     private static final Class ACTIVITY_MAIN_CLASS_NAME = MainActivity.class;
     private static final Class ACTIVITY_GUIDE_CLASS_NAME = GuideActivity.class;
-    private static final String IS_FIST_OPEN_KEY = "isfistopen";
+    private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class StartActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                boolean isFirstOpen = SharedPreferenceHelper.getBooleanValue(IS_FIST_OPEN_KEY);
+                boolean isFirstOpen = SharedPreferenceHelper.getBooleanValue(IS_FIRST_OPEN_KEY);
                 if (isFirstOpen) {
                     skipActivity(ACTIVITY_MAIN_CLASS_NAME);
                 }else{

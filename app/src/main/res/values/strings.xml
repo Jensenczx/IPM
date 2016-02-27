@@ -6,4 +6,7 @@
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_guide">GuideActivity</string>
     <string name="text_button_guide_view">立即体验</string>
+    <string name="text_please_login">请登录</string>
+    <string name="text_introduce_default">这个人很懒，什么都没有留下</string>
+
 </resources>

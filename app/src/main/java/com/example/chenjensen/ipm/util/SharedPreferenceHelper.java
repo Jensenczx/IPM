@@ -20,5 +20,6 @@ public class SharedPreferenceHelper {
         SharedPreferences mSharedPreference = MyApplication.getContext().getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor mEditor = mSharedPreference.edit();
         mEditor.putBoolean(KEY,value);
+        mEditor.commit();
     }
 }

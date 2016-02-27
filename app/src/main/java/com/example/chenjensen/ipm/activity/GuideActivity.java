@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
-import com.example.chenjensen.ipm.adapter.ViewPagerAdapter;
+import com.example.chenjensen.ipm.adapter.GuideViewPagerAdapter;
 import com.example.chenjensen.ipm.base.BaseActivity;
 import com.example.chenjensen.ipm.util.SharedPreferenceHelper;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class GuideActivity extends BaseActivity {
     private static final int VIEW_THREE_BUTTON_ID = R.id.guide_view_three_start_button;
     private static final int DOT_SELECTED_ID = R.drawable.dot_selected;
     private static final int DOT_UNSELECTED_ID = R.drawable.dot_unselected;
-    private static final String IS_FIST_OPEN_KEY = "isfistopen";
+    private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
 
 
     @Override
@@ -58,7 +58,7 @@ public class GuideActivity extends BaseActivity {
         list.add(mOneView);
         list.add(mTwoView);
         list.add(mThreeView);
-        ViewPagerAdapter mAdapter = new ViewPagerAdapter(list);
+        GuideViewPagerAdapter mAdapter = new GuideViewPagerAdapter(list);
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -98,7 +98,7 @@ public class GuideActivity extends BaseActivity {
     }
 
     public void recordHasStarted(){
-        SharedPreferenceHelper.setBooleanValue(IS_FIST_OPEN_KEY,true);
+        SharedPreferenceHelper.setBooleanValue(IS_FIRST_OPEN_KEY,true);
     }
 
     public void skip(){

@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Created by chenjensen on 16/2/25.
  */
-public class ViewPagerAdapter extends PagerAdapter{
+public class GuideViewPagerAdapter extends PagerAdapter{
 
     private List<View> mList;
 
-    public ViewPagerAdapter(List<View> list){
+    public GuideViewPagerAdapter(List<View> list){
         mList = list;
     }
 
