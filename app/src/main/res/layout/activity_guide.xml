@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="15dp"
-            android:src="@drawable/dot_unselected"
+            android:src="@drawable/guideview_dot_unselected"
             android:clickable="true"
             />
         <ImageView
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="15dp"
-            android:src="@drawable/dot_unselected"
+            android:src="@drawable/guideview_dot_unselected"
             android:clickable="true"
             />
         <ImageView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="15dp"
-            android:src="@drawable/dot_unselected"
+            android:src="@drawable/guideview_dot_unselected"
             android:clickable="true"
             />
 

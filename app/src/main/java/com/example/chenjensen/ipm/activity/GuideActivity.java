@@ -26,8 +26,8 @@ public class GuideActivity extends BaseActivity {
     private static final int VIEW_TWO_ID = R.layout.guide_view_two;
     private static final int VIEW_THREE_ID = R.layout.guide_view_three;
     private static final int VIEW_THREE_BUTTON_ID = R.id.guide_view_three_start_button;
-    private static final int DOT_SELECTED_ID = R.drawable.dot_selected;
-    private static final int DOT_UNSELECTED_ID = R.drawable.dot_unselected;
+    private static final int DOT_SELECTED_ID = R.drawable.guideview_dot_selected;
+    private static final int DOT_UNSELECTED_ID = R.drawable.guideview_dot_unselected;
     private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
 
 
