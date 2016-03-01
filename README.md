@@ -9,3 +9,5 @@
 - ~~滑动引导界面~~
 - ~~策划导航栏View布局设计~~
 - ~~主页Toolbar布局样式设计~~
+- ~~列表CardView布局设计~~
+- ~~解决ListView和SwipRefreshLayout的冲突问题~~

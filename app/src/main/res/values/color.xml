@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffff</color>
+    <color name="snow_white">#FFFAFA</color>
     <color name="black">#000000</color>
     <color name="deep_sky_blue">#00BFFF</color>
     <color name="light_sky_blue">#87CEFA</color>
