@@ -11,3 +11,4 @@
 - ~~主页Toolbar布局样式设计~~
 - ~~列表CardView布局设计~~
 - ~~解决ListView和SwipRefreshLayout的冲突问题~~
+- ~~首页滚动展示条~~
