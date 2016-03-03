@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by chenjensen on 16/2/27.
  */
-public class PageListAdapter extends BaseAdapter {
+public class ColumnListAdapter extends BaseAdapter {
     private List<PageListEntity> mList;
     private Context mContext;
     private int mResourceID;
@@ -31,7 +31,7 @@ public class PageListAdapter extends BaseAdapter {
         private Button btn;
     }
 
-    public PageListAdapter(Context context,List<PageListEntity> list,int resourceID){
+    public ColumnListAdapter(Context context, List<PageListEntity> list, int resourceID){
         mList = list;
         mContext = context;
         mResourceID = resourceID;

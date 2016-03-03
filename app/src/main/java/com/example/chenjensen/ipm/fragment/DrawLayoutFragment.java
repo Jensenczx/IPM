@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.example.chenjensen.ipm.R;
-import com.example.chenjensen.ipm.adapter.PageListAdapter;
+import com.example.chenjensen.ipm.adapter.ColumnListAdapter;
 import com.example.chenjensen.ipm.entity.PageListEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class DrawLayoutFragment extends Fragment {
 
     private static final int DRAWLAYOUT_VIEW_ID = R.layout.drawlayout_view_content;
     private static final int LISTVIEW_VIEW_ID = R.id.drawer_layout_item_listview;
-    private static final int ITEM_VIEW_LAYOUT = R.layout.item_pagelist;
+    private static final int ITEM_VIEW_LAYOUT = R.layout.item_column_listview;
     private ListView mListView;
-    private PageListAdapter mAdapter;
+    private ColumnListAdapter mAdapter;
     private List<PageListEntity> mList;
     private View mView;
 
@@ -41,7 +41,7 @@ public class DrawLayoutFragment extends Fragment {
 
     public void initData(){
         getData();
-        mAdapter = new PageListAdapter(getActivity(),mList,ITEM_VIEW_LAYOUT);
+        mAdapter = new ColumnListAdapter(getActivity(),mList,ITEM_VIEW_LAYOUT);
     }
 
     public void getData(){

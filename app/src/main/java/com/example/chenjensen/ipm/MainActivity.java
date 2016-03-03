@@ -1,7 +1,7 @@
 package com.example.chenjensen.ipm;
 
+import android.content.Intent;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.chenjensen.ipm.activity.EssayActivity;
 import com.example.chenjensen.ipm.adapter.EssayListviewAdapter;
 import com.example.chenjensen.ipm.adapter.HeaderViewPagerAdapter;
 import com.example.chenjensen.ipm.entity.EssayEntity;
@@ -123,6 +126,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                skip();
+            }
+        });
+
     }
 
     public void initData(){
@@ -131,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         mList = new ArrayList<EssayEntity>();
         for(int i=0; i<10; i++)
             mList.add(entity);
-        mEssayAdapter = new EssayListviewAdapter(this,mList,R.layout.item_listview);
+        mEssayAdapter = new EssayListviewAdapter(this,mList,R.layout.item_essay_listview);
         //初始化headview数据
         mImageViewList = new ArrayList<ImageView>();
         int[] imageIDs = new int[] {
@@ -184,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 // 新索引赋值给上一个索引的位置
                 currentItem = newPositon;
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 
@@ -208,6 +219,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void skip(){
+        Intent intent = new Intent();
+        intent.setClass(this, EssayActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

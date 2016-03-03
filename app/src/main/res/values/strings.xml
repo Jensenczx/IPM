@@ -8,5 +8,9 @@
     <string name="text_button_guide_view">立即体验</string>
     <string name="text_please_login">请登录</string>
     <string name="text_introduce_default">这个人很懒，什么都没有留下</string>
-
+    <string name="title_activity_essay">EssayActivity</string>
+    <string name="action_share">分享</string>
+    <string name="action_collect">收藏</string>
+    <string name="action_like">喜欢</string>
+    <string name="title_activity_comment">CommentActivity</string>
 </resources>

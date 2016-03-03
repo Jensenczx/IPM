@@ -1,7 +1,7 @@
 #IPM
 ###TARGET
 
-实现一个人人都是产品经理网站的一个Android APP，界面和样式模仿果壳的客户端。
+实现一个人人都是产品经理网站的一个Android APP，界面和样式模仿知乎日报的客户端。
 
 ###FEATURE
 
@@ -12,3 +12,7 @@
 - ~~列表CardView布局设计~~
 - ~~解决ListView和SwipRefreshLayout的冲突问题~~
 - ~~首页滚动展示条~~
+- ~~文章内容布局展示~~
+
+###Lib
+ - CoordinatorLayout
