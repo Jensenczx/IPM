@@ -18,8 +18,9 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     public void initView(){
-        Toolbar mToolbar = (Toolbar)findViewById(R.id.main_activity_toolbar);
+        Toolbar mToolbar = (Toolbar)findViewById(R.id.comment_activity_toolbar);
         mToolbar.setNavigationIcon(R.drawable.toolbar_menu);
+        setSupportActionBar(mToolbar);
     }
 
     @Override

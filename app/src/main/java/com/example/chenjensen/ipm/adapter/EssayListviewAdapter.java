@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.entity.EssayEntity;
 import com.example.chenjensen.ipm.entity.PageListEntity;
+import com.example.chenjensen.ipm.imageloader.ImageLoader;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class EssayListviewAdapter extends BaseAdapter{
     private List<EssayEntity> mList;
     private Context mContext;
     private int mResourceID;
+    private ImageLoader mLoader;
     private LayoutInflater mInflater;
     class ViewHolder{
         private TextView tv;
@@ -34,6 +36,8 @@ public class EssayListviewAdapter extends BaseAdapter{
         mContext = context;
         mResourceID = resourceID;
         mInflater = LayoutInflater.from(context);
+        mLoader = ImageLoader.build();
+
     }
 
     @Override
@@ -65,7 +69,9 @@ public class EssayListviewAdapter extends BaseAdapter{
             mHolder = (ViewHolder)convertView.getTag();
         }
         mHolder.tv.setText("这是我的第一个,qiaoh，这里有意去哪的演员和百分点值多少");
-        mHolder.iv.setImageResource(R.drawable.ic_photo);
+        String url = "http://7xj8xg.com1.z0.glb.clouddn.com/traceroute2.png";
+        mHolder.iv.setTag(url);
+        mLoader.bindBitmap(url, mHolder.iv, 80, 80);
         return convertView;
     }
 }
