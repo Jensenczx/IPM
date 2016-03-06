@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
-    private static final int TOOBAR_LOGO_RES_ID = R.drawable.toolbar_menu;
+    private static final int TOOBAR_LOGO_RES_ID = R.drawable.ic_menu;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView mListView;
     private SwipeRefreshLayout mSwipeRefreshLayout;

@@ -44,6 +44,10 @@
             android:name=".activity.CommentActivity"
             android:label="@string/title_activity_comment" >
         </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

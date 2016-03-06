@@ -3,4 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.chenjensen.ipm.activity.CommentActivity">
 
+    <item android:id="@+id/action_write_comment"
+        android:title="@string/action_comment"
+        android:orderInCategory="70" app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_comment_write"
+        />
+
+
+
 </menu>

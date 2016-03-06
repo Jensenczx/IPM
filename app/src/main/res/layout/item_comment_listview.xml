@@ -4,13 +4,15 @@
     android:layout_margin="10dp">
     <ImageView
         android:id="@+id/user_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         />
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_toRightOf="@id/user_photo"
         android:layout_marginLeft="10dp"
         />
@@ -18,13 +20,18 @@
         android:id="@+id/user_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
        />
 
     <TextView
         android:id="@+id/user_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:layout_toRightOf="@id/user_photo"
         android:layout_marginLeft="10dp"/>
 

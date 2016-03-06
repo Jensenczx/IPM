@@ -5,10 +5,20 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.chenjensen.ipm.R;
+import com.example.chenjensen.ipm.adapter.CommentAdapter;
+import com.example.chenjensen.ipm.entity.CommentEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentActivity extends AppCompatActivity {
+
+    private Toolbar mToolbar;
+    private ListView mListView;
+    private List<CommentEntity> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +28,17 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     public void initView(){
-        Toolbar mToolbar = (Toolbar)findViewById(R.id.comment_activity_toolbar);
-        mToolbar.setNavigationIcon(R.drawable.toolbar_menu);
+        mToolbar = (Toolbar)findViewById(R.id.comment_activity_toolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setTitle("评论");
         setSupportActionBar(mToolbar);
+        mListView = (ListView)findViewById(R.id.comment_activity_listview);
+        mList = new ArrayList<CommentEntity>();
+        CommentEntity entity = new CommentEntity();
+        for(int i=0; i<5; i++)
+            mList.add(entity);
+        CommentAdapter adapter = new CommentAdapter(this,mList,R.layout.item_comment_listview);
+        mListView.setAdapter(adapter);
     }
 
     @Override

@@ -56,7 +56,7 @@
             android:id="@+id/essay_activity_floatbutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/toolbar_menu"
+            android:src="@drawable/ic_comment"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             app:layout_anchor="@id/essay_activity_nscrollview"

@@ -7,13 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.ImageView;
 
 import com.example.chenjensen.ipm.R;
-import com.example.chenjensen.ipm.imageloader.ImageLoader;
 import com.example.chenjensen.ipm.net.MyWebViewClient;
 
 public class EssayActivity extends AppCompatActivity {
@@ -27,7 +24,7 @@ public class EssayActivity extends AppCompatActivity {
 
     public void initView(){
         Toolbar mToolbar = (Toolbar)findViewById(R.id.essay_activity_toolbar);
-        mToolbar.setNavigationIcon(R.drawable.toolbar_menu);
+        mToolbar.setNavigationIcon(R.drawable.ic_back);
         setSupportActionBar(mToolbar);
         CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar_layout);
         mCollapsingToolbarLayout.setTitle("zhejiushi");
