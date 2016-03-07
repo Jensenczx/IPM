@@ -18,11 +18,13 @@
             android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/drawer_layout_profile_icon_imageview"
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:background="@drawable/ic_account_circle_white_24dp" />
+                app:border_width="0dp"
+                app:border_color="@color/deep_sky_blue"/>
 
             <TextView
                 android:id="@+id/drawer_layout_profile_name_textview"

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.entity.PageListEntity;
+import com.example.chenjensen.ipm.util.ToastUtil;
 
 import java.util.List;
 
@@ -67,6 +68,13 @@ public class ColumnListAdapter extends BaseAdapter {
         mHolder.tv.setText(mList.get(position).getName());
         if(mList.get(position).getIsFollow()==0)
             mHolder.btn.setBackgroundResource(DRAWBLE_ADDED);
+        mHolder.btn.setFocusable(false);
+        mHolder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.showToast("nihao");
+            }
+        });
         return convertView;
     }
 

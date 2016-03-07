@@ -11,7 +11,7 @@ import java.io.FileDescriptor;
  */
 public class BitmapHelper {
 
-    public Bitmap decodeBitmapFromResource(Resources res,int resId,int reqWidth,int reqHeight){
+    public static  Bitmap decodeBitmapFromResource(Resources res,int resId,int reqWidth,int reqHeight){
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res,resId,options);
@@ -20,7 +20,7 @@ public class BitmapHelper {
         return BitmapFactory.decodeResource(res,resId,options);
     }
 
-    public Bitmap decodeBitmapFromFileDescriptor(FileDescriptor fd,int reqWidth,int reqHeight){
+    public static Bitmap decodeBitmapFromFileDescriptor(FileDescriptor fd,int reqWidth,int reqHeight){
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFileDescriptor(fd,null,options);
@@ -29,7 +29,7 @@ public class BitmapHelper {
         return BitmapFactory.decodeFileDescriptor(fd,null,options);
     }
 
-    public int calculateInSampleSize(BitmapFactory.Options options,int reqWidth,int reqHeight){
+    public static int calculateInSampleSize(BitmapFactory.Options options,int reqWidth,int reqHeight){
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;

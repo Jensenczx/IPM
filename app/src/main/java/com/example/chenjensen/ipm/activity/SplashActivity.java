@@ -2,20 +2,26 @@ package com.example.chenjensen.ipm.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.base.BaseActivity;
+import com.example.chenjensen.ipm.imageloader.BitmapHelper;
+import com.example.chenjensen.ipm.util.DisplayHelper;
 import com.example.chenjensen.ipm.util.SharedPreferenceHelper;
 
-public class StartActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity {
 
     private View mView;
     private Animation mAnimation;
-    private static final int VIEW_ID = R.layout.activity_start;
+    private ImageView mImageView;
+    private static final int VIEW_ID = R.layout.activity_splash;
     private static final int ANIM_ID = R.anim.alpha;
     private static final Class ACTIVITY_MAIN_CLASS_NAME = MainActivity.class;
     private static final Class ACTIVITY_GUIDE_CLASS_NAME = GuideActivity.class;
@@ -26,6 +32,7 @@ public class StartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mView = View.inflate(this,VIEW_ID,null);
         setContentView(mView);
+        initView();
         playAnimation();
     }
 
@@ -43,7 +50,7 @@ public class StartActivity extends BaseActivity {
                 boolean isFirstOpen = SharedPreferenceHelper.getBooleanValue(IS_FIRST_OPEN_KEY);
                 if (isFirstOpen) {
                     skipActivity(ACTIVITY_MAIN_CLASS_NAME);
-                }else{
+                } else {
                     skipActivity(ACTIVITY_GUIDE_CLASS_NAME);
                 }
             }
@@ -53,6 +60,11 @@ public class StartActivity extends BaseActivity {
 
             }
         });
+    }
+
+    public void initView(){
+        mImageView = (ImageView)findViewById(R.id.splash_bg_imageview);
+        mImageView.setImageBitmap(BitmapHelper.decodeBitmapFromResource(getResources(),R.drawable.bg_splash, DisplayHelper.w_screen,DisplayHelper.h_screen));
     }
 
     @Override

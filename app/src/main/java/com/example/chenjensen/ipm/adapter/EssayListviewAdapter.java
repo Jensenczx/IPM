@@ -36,8 +36,7 @@ public class EssayListviewAdapter extends BaseAdapter{
         mContext = context;
         mResourceID = resourceID;
         mInflater = LayoutInflater.from(context);
-        mLoader = ImageLoader.build();
-
+        mLoader = ImageLoader.getInstance();
     }
 
     @Override

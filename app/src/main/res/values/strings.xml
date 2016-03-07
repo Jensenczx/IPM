@@ -19,5 +19,11 @@
     <string name="text_register">注册</string>
     <string name="text_account">账号</string>
     <string name="text_password">密码</string>
+    <string name="toast_wifi_connection">无线网络连接成功</string>
+    <string name="toast_mobile_connection">移动网络连接成功</string>
+    <string name="toast_no_connection">当前无网络连接</string>
+
+
+
 
 </resources>

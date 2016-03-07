@@ -7,13 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.net.MyWebViewClient;
 
 public class EssayActivity extends AppCompatActivity {
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +26,14 @@ public class EssayActivity extends AppCompatActivity {
     }
 
     public void initView(){
-        Toolbar mToolbar = (Toolbar)findViewById(R.id.essay_activity_toolbar);
+        mToolbar = (Toolbar)findViewById(R.id.essay_activity_toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skip2MainActivity();
+            }
+        });
         setSupportActionBar(mToolbar);
         CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar_layout);
         mCollapsingToolbarLayout.setTitle("zhejiushi");
@@ -37,18 +46,24 @@ public class EssayActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                skip();
+                skip2CommentActivity();
             }
         });
 
     }
 
-    private void skip(){
+    private void skip2CommentActivity(){
         Intent intent = new Intent();
         intent.setClass(this,CommentActivity.class);
         startActivity(intent);
     }
 
+    private void skip2MainActivity(){
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

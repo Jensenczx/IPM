@@ -56,6 +56,8 @@ public class ImageLoader {
     private static final int TAG_KEY_URI = 1;
     private static final String TAG = "ImageLoader";
 
+    private static ImageLoader mLoader;
+
     //线程工厂
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
         //防止并发时，值出现问题，java提供的一个原子操作的类
@@ -118,8 +120,14 @@ public class ImageLoader {
     }
 
     //创建loader实例
-    public static ImageLoader build(){
-        return new ImageLoader();
+    public static ImageLoader getInstance(){
+        if(mLoader==null){
+            synchronized (ImageLoader.class){
+                if(mLoader==null)
+                    mLoader = new ImageLoader();
+            }
+        }
+        return mLoader;
     }
 
     //加载bitmap,先从内存缓冲区，然后是从磁盘缓冲区，都没有的时候从网络进行加载
