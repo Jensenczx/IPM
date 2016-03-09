@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.entity.EssayEntity;
-import com.example.chenjensen.ipm.entity.PageListEntity;
 import com.example.chenjensen.ipm.imageloader.ImageLoader;
 
 import java.util.List;

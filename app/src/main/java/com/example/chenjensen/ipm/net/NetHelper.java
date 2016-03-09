@@ -11,13 +11,15 @@ import com.example.chenjensen.ipm.base.MyApplication;
  */
 public class NetHelper {
 
-    private static ConnectivityManager cm;
-
-    public static boolean isNetConnected() {
-        if(cm==null)
-         cm = (ConnectivityManager) MyApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState()==null&&cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState()==null)
-            return false;
-        return true;
+    public static boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
     }
 }

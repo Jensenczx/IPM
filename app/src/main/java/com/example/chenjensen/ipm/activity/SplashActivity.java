@@ -9,10 +9,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.chenjensen.ipm.AppConfig;
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.base.BaseActivity;
 import com.example.chenjensen.ipm.imageloader.BitmapHelper;
+import com.example.chenjensen.ipm.imageloader.ImageLoader;
 import com.example.chenjensen.ipm.util.DisplayHelper;
 import com.example.chenjensen.ipm.util.SharedPreferenceHelper;
 
@@ -25,7 +27,6 @@ public class SplashActivity extends BaseActivity {
     private static final int ANIM_ID = R.anim.alpha;
     private static final Class ACTIVITY_MAIN_CLASS_NAME = MainActivity.class;
     private static final Class ACTIVITY_GUIDE_CLASS_NAME = GuideActivity.class;
-    private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,9 @@ public class SplashActivity extends BaseActivity {
             public void onAnimationStart(Animation animation) {
 
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
-                boolean isFirstOpen = SharedPreferenceHelper.getBooleanValue(IS_FIRST_OPEN_KEY);
-                if (isFirstOpen) {
+                if (AppConfig.isFirstOpen()) {
                     skipActivity(ACTIVITY_MAIN_CLASS_NAME);
                 } else {
                     skipActivity(ACTIVITY_GUIDE_CLASS_NAME);
@@ -61,7 +60,6 @@ public class SplashActivity extends BaseActivity {
             }
         });
     }
-
     public void initView(){
         mImageView = (ImageView)findViewById(R.id.splash_bg_imageview);
         mImageView.setImageBitmap(BitmapHelper.decodeBitmapFromResource(getResources(),R.drawable.bg_splash, DisplayHelper.w_screen,DisplayHelper.h_screen));

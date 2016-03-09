@@ -3,14 +3,14 @@ package com.example.chenjensen.ipm.entity;
 /**
  * Created by chenjensen on 16/2/27.
  */
-public class PageListEntity {
+public class ColumnEntity {
 
     private String name;
     private String url;
     //0表示未关注，1表示关注了
     private int isFollow;
 
-    public PageListEntity(){
+    public ColumnEntity(){
 
     }
 

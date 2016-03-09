@@ -5,4 +5,5 @@
     <color name="black">#000000</color>
     <color name="deep_sky_blue">#00BFFF</color>
     <color name="light_sky_blue">#87CEFA</color>
+    <color name="trans">#00000000</color>
 </resources>

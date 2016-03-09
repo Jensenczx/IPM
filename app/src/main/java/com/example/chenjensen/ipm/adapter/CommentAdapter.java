@@ -25,6 +25,7 @@ public class CommentAdapter extends BaseAdapter {
         private TextView userComment;
         private TextView userLike;
         private ImageView userPhoto;
+        private ImageView userLikeIv;
     }
 
     public CommentAdapter(Context context,List<CommentEntity> list,int resourceID){
@@ -40,7 +41,7 @@ public class CommentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder mHolder;
+        final ViewHolder mHolder;
         if(convertView==null){
             mHolder = new ViewHolder();
             convertView = mInflater.inflate(mResourceID,parent,false);
@@ -48,14 +49,26 @@ public class CommentAdapter extends BaseAdapter {
             mHolder.userName = (TextView)convertView.findViewById(R.id.user_name);
             mHolder.userLike = (TextView)convertView.findViewById(R.id.user_like);
             mHolder.userComment = (TextView)convertView.findViewById(R.id.user_comment);
+            mHolder.userLikeIv = (ImageView)convertView.findViewById(R.id.user_like_image);
             convertView.setTag(mHolder);
         }
         else{
             mHolder = (ViewHolder)convertView.getTag();
         }
         mHolder.userName.setText("name");
-        mHolder.userComment.setText("fdfdfdfdfdfdfdfdf");
+        mHolder.userComment.setText("，这是一个高质量的技术干货分享社区，web前端、Android、iOS、设计资源和产品，满足你的学习欲望。\n" +
+                "\n" +
+                "这篇文章因为是台湾人写的，语言风格很别致。本文在原文的基础上做了一些微调（主要是繁体字的问题）。\n" +
+                "\n" +
+                "今年(2014) 的 google i/o 发表令多数人为之一亮的 material design，而 google 也从「google i/o 2014」 开始，大家也陆陆续续地看到其更新的 android app 皆套用了这个设计介面。当然，这个设计介面著实让大家感到惊艳外" +
+                "，更让 android 开发者开始担心未来 app 的界面处理了。\n");
         mHolder.userLike.setText("12");
+        mHolder.userLikeIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHolder.userLikeIv.setImageResource(R.drawable.ic_like);
+            }
+        });
         mHolder.userPhoto.setImageResource(R.drawable.ic_photo);
         return convertView;
     }

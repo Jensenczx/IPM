@@ -8,9 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.chenjensen.ipm.AppConfig;
 import com.example.chenjensen.ipm.R;
-import com.example.chenjensen.ipm.entity.PageListEntity;
-import com.example.chenjensen.ipm.util.ToastUtil;
+import com.example.chenjensen.ipm.entity.ColumnEntity;
 
 import java.util.List;
 
@@ -18,7 +18,8 @@ import java.util.List;
  * Created by chenjensen on 16/2/27.
  */
 public class ColumnListAdapter extends BaseAdapter {
-    private List<PageListEntity> mList;
+
+    private List<ColumnEntity> mList;
     private Context mContext;
     private int mResourceID;
     private LayoutInflater mInflater;
@@ -32,7 +33,7 @@ public class ColumnListAdapter extends BaseAdapter {
         private Button btn;
     }
 
-    public ColumnListAdapter(Context context, List<PageListEntity> list, int resourceID){
+    public ColumnListAdapter(Context context, List<ColumnEntity> list, int resourceID){
         mList = list;
         mContext = context;
         mResourceID = resourceID;
@@ -55,7 +56,7 @@ public class ColumnListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if(convertView==null){
             mHolder = new ViewHolder();
             convertView = mInflater.inflate(mResourceID,parent,false);
@@ -65,18 +66,22 @@ public class ColumnListAdapter extends BaseAdapter {
         }else{
             mHolder = (ViewHolder)convertView.getTag();
         }
-        mHolder.tv.setText(mList.get(position).getName());
-        if(mList.get(position).getIsFollow()==0)
+        final ColumnEntity entity = mList.get(position);
+        mHolder.tv.setText(entity.getName());
+        if(entity.getIsFollow()==1)
             mHolder.btn.setBackgroundResource(DRAWBLE_ADDED);
+        else
+            mHolder.btn.setBackgroundResource(R.drawable.add_page_list);
         mHolder.btn.setFocusable(false);
         mHolder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showToast("nihao");
+                AppConfig.setIsFollow(entity.getName(),Math.abs(entity.getIsFollow()-1));
+                entity.setIsFollow(Math.abs(entity.getIsFollow()-1));
+                notifyDataSetChanged();
             }
         });
         return convertView;
     }
-
 
 }

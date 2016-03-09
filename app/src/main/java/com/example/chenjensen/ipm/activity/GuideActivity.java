@@ -30,7 +30,6 @@ public class GuideActivity extends BaseActivity {
     private static final int DOT_UNSELECTED_ID = R.drawable.guideview_dot_unselected;
     private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

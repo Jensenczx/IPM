@@ -18,4 +18,14 @@
         <item name="android:colorBackground">@color/black</item>
     </style>
 
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/trans</item>
+    </style>
+
+    <style name="expandtextview" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

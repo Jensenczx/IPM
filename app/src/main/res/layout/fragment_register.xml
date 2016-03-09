@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash"
+    tools:context="com.example.chenjensen.ipm.fragment.RegisterFragment">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fragment_register_photo_imageview"
+        android:layout_centerHorizontal="true"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_photo_default"
+        app:border_width="0dp"
+        app:border_color="@color/deep_sky_blue"/>
+
+    <RelativeLayout
+        android:id="@+id/fragment_register_edittext_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/fragment_register_photo_imageview"
+        >
+
+        <EditText
+            android:id="@+id/fragment_register_name_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_input_name"
+            android:layout_marginTop="10dp"
+            />
+
+        <EditText
+            android:id="@+id/fragment_register_intrdouce_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/fragment_register_name_edittext"
+            android:hint="@string/hint_input_introuce"
+            />
+
+        <EditText
+            android:id="@+id/fragment_register_account_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/fragment_register_intrdouce_edittext"
+            android:hint="@string/hint_input_phone"
+            />
+
+        <EditText
+            android:id="@+id/fragment_register_password_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/fragment_register_account_edittext"
+            android:hint="@string/hint_input_password"/>
+
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/fragment_register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_register_edittext_layout"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_register"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
+        android:theme="@style/MyButton"/>
+
+</RelativeLayout>

@@ -7,10 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.net.MyWebViewClient;
@@ -27,6 +25,7 @@ public class EssayActivity extends AppCompatActivity {
 
     public void initView(){
         mToolbar = (Toolbar)findViewById(R.id.essay_activity_toolbar);
+        setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,14 +33,16 @@ public class EssayActivity extends AppCompatActivity {
                 skip2MainActivity();
             }
         });
-        setSupportActionBar(mToolbar);
         CollapsingToolbarLayout mCollapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar_layout);
-        mCollapsingToolbarLayout.setTitle("zhejiushi");
+        mCollapsingToolbarLayout.setTitle("如果这个标题非常的长长长长度");
+        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandtextview);
+        mCollapsingToolbarLayout.setBackgroundResource(R.drawable.show1);
         WebView mWebView = (WebView)findViewById(R.id.essay_activity_webview);
         mWebView.setEnabled(true);
+        mWebView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         MyWebViewClient myWebViewClient = new MyWebViewClient();
         mWebView.setWebViewClient(myWebViewClient);
-        mWebView.loadUrl("http://www.cnblogs.com/menlsh/p/3139498.html");
+        mWebView.loadDataWithBaseURL("https://segmentfault.com/u/jensenczx", "<a href=\"/user/note\"></a>","text/html","utf-8",null);
         FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(R.id.essay_activity_floatbutton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

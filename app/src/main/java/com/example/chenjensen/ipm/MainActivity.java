@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -25,6 +26,7 @@ import com.example.chenjensen.ipm.activity.EssayActivity;
 import com.example.chenjensen.ipm.adapter.EssayListviewAdapter;
 import com.example.chenjensen.ipm.adapter.HeaderViewPagerAdapter;
 import com.example.chenjensen.ipm.entity.EssayEntity;
+import com.example.chenjensen.ipm.fragment.ColumnFragment;
 import com.example.chenjensen.ipm.fragment.MainFragment;
 import java.util.List;
 
@@ -36,12 +38,14 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private Fragment mHomeFragment;
+    private Fragment mColumnFragment;
     private FragmentManager mFragmentManager;
     private ActionBarDrawerToggle mDrawerToggle;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private FrameLayout mContentFrameLayout;
     private long firstTime;
     private Snackbar sb;
+    private int curID=0;
 
 
     public Handler mHandler = new Handler(){
@@ -97,13 +101,36 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshViewPager(){
         if(mFragmentManager!=null){
-            ((MainFragment)mFragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG)).refreshViewPager();
+            if(((MainFragment)mFragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG))!=null)
+                ((MainFragment)mFragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG)).refreshViewPager();
         }
     }
 
     public void closeMenu(){
         if(mDrawerLayout!=null)
         mDrawerLayout.closeDrawers();
+    }
+
+    public int getcurID(){
+       return curID;
+    }
+
+    public void replaceFragment(){
+        if(curID==0){
+            if(mColumnFragment == null){
+                mColumnFragment = new ColumnFragment();
+            }
+            mFragmentManager.beginTransaction().replace(
+                    R.id.main_activity_content_framelayout,mColumnFragment).commit();
+            curID = 1;
+        }else{
+            if(mHomeFragment==null){
+                mHomeFragment = new MainFragment();
+            }
+            mFragmentManager.beginTransaction().replace(R.id.main_activity_content_framelayout,mHomeFragment).commit();
+            curID = 0;
+        }
+
     }
 
     public void setmSwipeRefreshLayout(boolean enable){
@@ -114,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
             closeMenu();
-        } else {
+        } else if(curID==1){
+            replaceFragment();
+        } else{
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {
                 sb = Snackbar.make(mContentFrameLayout, "再按一次退出", Snackbar.LENGTH_SHORT);
@@ -134,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

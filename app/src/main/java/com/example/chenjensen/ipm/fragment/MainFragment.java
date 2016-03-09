@@ -179,7 +179,12 @@ public class MainFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
         startPlay();
+        super.onStart();
     }
 
     @Override
