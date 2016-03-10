@@ -7,22 +7,22 @@ public class CommentEntity {
     private String userName;
     private String userComment;
     private String userPhoto;
-    private String userLike;
-    private boolean ifLike;
+    private int userLike;
+    private boolean isLike;
 
     public void setUserName(String userName){
         this.userName = userName;
     }
 
-    public void setIfLike(boolean ifLike) {
-        this.ifLike = ifLike;
+    public void setIsLike(boolean ifLike) {
+        this.isLike = ifLike;
     }
 
     public void setUserComment(String userComment) {
         this.userComment = userComment;
     }
 
-    public void setUserLike(String userLike) {
+    public void setUserLike(int userLike) {
         this.userLike = userLike;
     }
 
@@ -34,7 +34,7 @@ public class CommentEntity {
         return userComment;
     }
 
-    public String getUserLike() {
+    public int getUserLike() {
         return userLike;
     }
 
@@ -44,5 +44,9 @@ public class CommentEntity {
 
     public String getUserPhoto() {
         return userPhoto;
+    }
+
+    public boolean getIsLike() {
+        return isLike;
     }
 }

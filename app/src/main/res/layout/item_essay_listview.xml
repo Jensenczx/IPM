@@ -15,7 +15,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         >
 
         <ImageView
@@ -29,7 +28,7 @@
             />
         <TextView
             android:id="@+id/item_page_textview"
-            android:layout_toLeftOf="@+id/item_page_imageview"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

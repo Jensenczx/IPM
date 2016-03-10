@@ -2,6 +2,8 @@ package com.example.chenjensen.ipm.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,9 +15,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.adapter.CommentAdapter;
 import com.example.chenjensen.ipm.entity.CommentEntity;
+import com.example.chenjensen.ipm.net.GsonRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +32,25 @@ public class CommentActivity extends AppCompatActivity {
     private ListView mListView;
     private List<CommentEntity> mList;
     private String mComment;
+    private CommentEntity[] mCommentArray;
+    private String url;
+    private CommentAdapter mAdapter;
+    private static final int MSG_UPDATE_WHAT = 201;
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case MSG_UPDATE_WHAT:break;
+                default:break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        initData();
         initView();
     }
 
@@ -48,11 +67,31 @@ public class CommentActivity extends AppCompatActivity {
         });
         mListView = (ListView)findViewById(R.id.comment_activity_listview);
         mList = new ArrayList<CommentEntity>();
-        CommentEntity entity = new CommentEntity();
-        for(int i=0; i<5; i++)
-            mList.add(entity);
-        CommentAdapter adapter = new CommentAdapter(this,mList,R.layout.item_comment_listview);
-        mListView.setAdapter(adapter);
+        mAdapter = new CommentAdapter(this,mList,R.layout.item_comment_listview);
+        mListView.setAdapter(mAdapter);
+    }
+
+    public void updateListView(){
+        if(mCommentArray!=null){
+            for(int i=0; i<mCommentArray.length; i++){
+                mList.add(mCommentArray[i]);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void initData(){
+        GsonRequest<CommentEntity[]> request = new GsonRequest<CommentEntity[]>(url, CommentEntity[].class, new Response.Listener<CommentEntity[]>() {
+            @Override
+            public void onResponse(CommentEntity[] response) {
+                mCommentArray = response;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
     }
 
     public void skip2EssayActivity(){

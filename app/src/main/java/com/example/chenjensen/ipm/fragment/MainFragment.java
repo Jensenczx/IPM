@@ -3,8 +3,10 @@ package com.example.chenjensen.ipm.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +17,26 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.example.chenjensen.ipm.AppConfig;
 import com.example.chenjensen.ipm.MainActivity;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.activity.EssayActivity;
 import com.example.chenjensen.ipm.adapter.EssayListviewAdapter;
 import com.example.chenjensen.ipm.adapter.HeaderViewPagerAdapter;
 import com.example.chenjensen.ipm.entity.EssayEntity;
+import com.example.chenjensen.ipm.entity.EssayListEntity;
+import com.example.chenjensen.ipm.entity.UserEntity;
 import com.example.chenjensen.ipm.imageloader.BitmapHelper;
+import com.example.chenjensen.ipm.net.GsonRequest;
+import com.example.chenjensen.ipm.net.VolleyManager;
 import com.example.chenjensen.ipm.util.DisplayHelper;
+import com.example.chenjensen.ipm.util.ToastUtil;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +60,9 @@ public class MainFragment extends Fragment {
     private int currentItem=0;
     private boolean isStop = false;
     private static final int UPDATE_VIEWPAGE_MSG_WHAT = 2;
+    private static final int UPDATE_ESSAY_LISTVIEW = 101;
+    private VolleyManager mVolleyManager;
+    private EssayEntity[] mEssayArray;
 
     /** Banner文字描述数组 */
     private String[] bannerTextDescArray = {
@@ -54,13 +71,23 @@ public class MainFragment extends Fragment {
             "揭秘北京电影如何升级",
             "乐视网TV版大派送", "热血屌丝的反杀"
     };
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case UPDATE_ESSAY_LISTVIEW:
+                    updateListView();break;
+                default:break;
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mInflater = inflater;
         mActivity = getActivity();
-        mView = inflater.inflate(R.layout.fragment_main,null);
+        mView = inflater.inflate(R.layout.fragment_main, null);
         initListView();
         return mView;
     }
@@ -75,31 +102,38 @@ public class MainFragment extends Fragment {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (mListView != null && mListView.getChildCount() > 0) {
                     boolean enable = (firstVisibleItem == 0) && (mListView.getChildAt(firstVisibleItem).getTop() == 0);
                     setSRLEnabled(enable);
                 }
-
             }
         });
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                skip2EssayActivity();
+                skip2EssayActivity(mList.get(position));
             }
         });
 
+    }
+
+    public void updateListView(){
+        for(int i=0; i<mEssayArray.length; i++)
+            mList.add(mEssayArray[i]);
+        mEssayAdapter.notifyDataSetChanged();
     }
 
     public void setSRLEnabled(boolean enable){
         ((MainActivity) mActivity).setmSwipeRefreshLayout(enable);
     }
 
-    public void skip2EssayActivity(){
+    public void skip2EssayActivity(EssayEntity entity){
         Intent intent = new Intent();
+        intent.putExtra(AppConfig.ESSAY_TITLE,entity.getTitle());
+        intent.putExtra(AppConfig.ESSAY_PAGE_URL,entity.getPage());
+        intent.putExtra(AppConfig.ESSAY_CONTENT_URL, entity.getContent());
         intent.setClass(mActivity, EssayActivity.class);
         startActivity(intent);
     }
@@ -113,11 +147,9 @@ public class MainFragment extends Fragment {
     }
 
     public void initData(){
-        //初始化文章列表数据
-        EssayEntity entity = new EssayEntity();
         mList = new ArrayList<EssayEntity>();
-        for(int i=0; i<10; i++)
-            mList.add(entity);
+        getDataFromNetWork();
+        //初始化文章列表数据
         mEssayAdapter = new EssayListviewAdapter(mActivity,mList,R.layout.item_essay_listview);
         //初始化headview数据
         mImageViewList = new ArrayList<ImageView>();
@@ -179,6 +211,28 @@ public class MainFragment extends Fragment {
 
             }
         });
+    }
+
+    public void getDataFromNetWork(){
+        String url="http://115.28.174.38:5000/";
+        mVolleyManager = VolleyManager.getSingleInstance();
+        GsonRequest<EssayEntity[]> request = new GsonRequest<EssayEntity[]>(url,EssayEntity[].class,new Response.Listener<EssayEntity[]>() {
+            @Override
+            public void onResponse(EssayEntity[] response) {
+                mEssayArray = response;
+                Message msg = mHandler.obtainMessage();
+                msg.what = UPDATE_ESSAY_LISTVIEW;
+                msg.sendToTarget();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("error",error.toString());
+                ToastUtil.showToast(error.toString());
+            }
+        });
+        mVolleyManager.addRequest(request);
+
     }
 
     @Override

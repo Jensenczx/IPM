@@ -1,31 +1,23 @@
 package com.example.chenjensen.ipm;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import com.example.chenjensen.ipm.activity.EssayActivity;
-import com.example.chenjensen.ipm.adapter.EssayListviewAdapter;
-import com.example.chenjensen.ipm.adapter.HeaderViewPagerAdapter;
-import com.example.chenjensen.ipm.entity.EssayEntity;
 import com.example.chenjensen.ipm.fragment.ColumnFragment;
 import com.example.chenjensen.ipm.fragment.MainFragment;
 import java.util.List;
@@ -67,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         mHomeFragment = new MainFragment();
         mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.beginTransaction().replace(R.id.main_activity_content_framelayout,mHomeFragment,HOME_FRAGMENT_TAG).commit();
+        mFragmentManager.beginTransaction().replace(R.id.main_activity_content_framelayout, mHomeFragment, HOME_FRAGMENT_TAG).commit();
     }
 
     public void initView(){
@@ -90,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        ((MainFragment)mFragmentManager.findFragmentByTag(HOME_FRAGMENT_TAG)).getDataFromNetWork();
                         mSwipeRefreshLayout.setRefreshing(false);
 
                     }
                 }, 3000);
+
             }
         });
         mContentFrameLayout = (FrameLayout)findViewById(R.id.main_activity_content_framelayout);
@@ -115,11 +109,12 @@ public class MainActivity extends AppCompatActivity {
        return curID;
     }
 
-    public void replaceFragment(){
+    public void replaceFragment(Bundle bundle){
         if(curID==0){
             if(mColumnFragment == null){
                 mColumnFragment = new ColumnFragment();
             }
+            mColumnFragment.setArguments(bundle);
             mFragmentManager.beginTransaction().replace(
                     R.id.main_activity_content_framelayout,mColumnFragment).commit();
             curID = 1;
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)) {
             closeMenu();
         } else if(curID==1){
-            replaceFragment();
+            replaceFragment(null);
         } else{
             long secondTime = System.currentTimeMillis();
             if (secondTime - firstTime > 2000) {

@@ -12,7 +12,11 @@ public class AppConfig {
 
     public static final String [] COLUMN_ARRAY = {"产品设计","交互体验","产品运营","原型设计"
             ,"业界动态","分析评测","职场攻略"};
-
+    public static final String ESSAY_CONTENT_URL = "essaycontent";
+    public static final String ESSAY_PAGE_URL = "essaypage";
+    public static final String ESSAY_TITLE = "essaytitle";
+    public static final String COLUMN_NAME = "columnname";
+    
     private static final String IS_FIRST_OPEN_KEY = "isfirstopen";
     private static final String IS_LOGIN = "islogin";
     private static final String USER_NAME = "username";
@@ -51,7 +55,9 @@ public class AppConfig {
         return null;
     }
 
-    public void 
+    public void getTheHomeColumn(){
+
+    }
 
     public static void saveUserInfo(UserEntity entity){
         if(entity!=null){

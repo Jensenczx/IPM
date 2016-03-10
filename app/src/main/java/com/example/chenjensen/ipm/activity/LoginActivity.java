@@ -17,6 +17,8 @@ import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.fragment.LoginFragment;
 import com.example.chenjensen.ipm.fragment.RegisterFragment;
 
+import org.json.JSONObject;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;

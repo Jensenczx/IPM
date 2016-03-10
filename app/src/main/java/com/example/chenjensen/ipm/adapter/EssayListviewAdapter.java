@@ -65,10 +65,11 @@ public class EssayListviewAdapter extends BaseAdapter{
         else{
             mHolder = (ViewHolder)convertView.getTag();
         }
-        mHolder.tv.setText("这是我的第一个,qiaoh，这里有意去哪的演员和百分点值多少");
-        String url = "http://7xj8xg.com1.z0.glb.clouddn.com/traceroute2.png";
-        mHolder.iv.setTag(url);
-        mLoader.bindBitmap(url, mHolder.iv, 80, 80);
+        EssayEntity entity = mList.get(position);
+        if(entity!=null){
+            mHolder.tv.setText(entity.getTitle());
+            mLoader.bindBitmap(entity.getPage(),mHolder.iv,80,80);
+        }
         return convertView;
     }
 }

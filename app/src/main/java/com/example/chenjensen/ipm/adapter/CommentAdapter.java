@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.chenjensen.ipm.R;
 import com.example.chenjensen.ipm.entity.CommentEntity;
+import com.example.chenjensen.ipm.imageloader.ImageLoader;
+
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ public class CommentAdapter extends BaseAdapter {
     private Context mContext;
     private int mResourceID;
     private LayoutInflater mInflater;
+    private ImageLoader mLoader;
     class ViewHolder{
         private TextView userName;
         private TextView userComment;
@@ -33,6 +36,7 @@ public class CommentAdapter extends BaseAdapter {
         mContext = context;
         mResourceID = resourceID;
         mInflater = LayoutInflater.from(context);
+
     }
     @Override
     public Object getItem(int position) {
@@ -55,21 +59,27 @@ public class CommentAdapter extends BaseAdapter {
         else{
             mHolder = (ViewHolder)convertView.getTag();
         }
-        mHolder.userName.setText("name");
-        mHolder.userComment.setText("，这是一个高质量的技术干货分享社区，web前端、Android、iOS、设计资源和产品，满足你的学习欲望。\n" +
-                "\n" +
-                "这篇文章因为是台湾人写的，语言风格很别致。本文在原文的基础上做了一些微调（主要是繁体字的问题）。\n" +
-                "\n" +
-                "今年(2014) 的 google i/o 发表令多数人为之一亮的 material design，而 google 也从「google i/o 2014」 开始，大家也陆陆续续地看到其更新的 android app 皆套用了这个设计介面。当然，这个设计介面著实让大家感到惊艳外" +
-                "，更让 android 开发者开始担心未来 app 的界面处理了。\n");
-        mHolder.userLike.setText("12");
+        final CommentEntity entity = mlist.get(position);
+        mHolder.userName.setText(entity.getUserName());
+        mHolder.userComment.setText(entity.getUserComment());
+        mHolder.userLike.setText(entity.getUserLike());
+        if(entity.getIsLike())
+            mHolder.userLikeIv.setImageResource(R.drawable.ic_unlike);
+        else
+            mHolder.userLikeIv.setImageResource(R.drawable.ic_like);
         mHolder.userLikeIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHolder.userLikeIv.setImageResource(R.drawable.ic_like);
+                if(entity.getIsLike()){
+                    mHolder.userLikeIv.setImageResource(R.drawable.ic_unlike);
+                    entity.setIsLike(false);
+                }else{
+                    mHolder.userLikeIv.setImageResource(R.drawable.ic_like);
+                    entity.setIsLike(true);
+                }
             }
         });
-        mHolder.userPhoto.setImageResource(R.drawable.ic_photo);
+        mLoader.bindBitmap(entity.getUserPhoto(), mHolder.userPhoto, 32, 32);
         return convertView;
     }
 

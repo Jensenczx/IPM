@@ -80,7 +80,9 @@ public class DrawLayoutFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openTheColumnFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(AppConfig.COLUMN_NAME,AppConfig.COLUMN_ARRAY[position]);
+                openTheColumnFragment(bundle);
                 closeDraw();
             }
         });
@@ -99,7 +101,7 @@ public class DrawLayoutFragment extends Fragment {
         mHomeTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openTheHomeFragment();
+                openTheHomeFragment(null);
                 closeDraw();
             }
         });
@@ -149,13 +151,13 @@ public class DrawLayoutFragment extends Fragment {
 
     }
 
-    public void openTheHomeFragment(){
+    public void openTheHomeFragment(Bundle bundle){
         if(((MainActivity)getActivity()).getcurID()==1)
-        ((MainActivity)getActivity()).replaceFragment();
+        ((MainActivity)getActivity()).replaceFragment(bundle);
     }
 
-    public void openTheColumnFragment(){
-        ((MainActivity)getActivity()).replaceFragment();
+    public void openTheColumnFragment(Bundle bundle){
+        ((MainActivity)getActivity()).replaceFragment(bundle);
     }
 
     public void getData(){
